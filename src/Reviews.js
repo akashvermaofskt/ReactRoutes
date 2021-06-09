@@ -1,3 +1,5 @@
+import Review from './Review';
+import { Container , Row} from 'reactstrap';
 
 const PRODUCT_INFO = {
     1 : {
@@ -10,7 +12,7 @@ const PRODUCT_INFO = {
             {"author": "XYZ", "review":"BAD!"},
             {"author": "ABCDe", "review":"GOOD!"},
             {"author": "DEF", "review":"OK!"},
-            {"author": "XYZ", "review":"BAD!", dev },
+            {"author": "XYZ", "review":"BAD!" },
         ]
     },
     2 : {
@@ -30,7 +32,7 @@ const PRODUCT_INFO = {
     },
 }
 
-FRIENDS = {
+const FRIENDS = {
     1 : [2,3,4],
     2 : [1,6],
     3 : [1],
@@ -39,7 +41,7 @@ FRIENDS = {
     6 : [],
 }
 
-const Review = (props) => {
+const Reviews = (props) => {
     const product_id = props.match.params.product_id;
     const viewer_id = props.match.params.viewer_id;
     
@@ -47,19 +49,20 @@ const Review = (props) => {
     <div>
         product_id = {product_id} <br/>
         viewer_id = {viewer_id}
-        Reviews : {
-            PRODUCT_INFO[product_id].reviews.map(
-                (review, index) => {
-                    return (
-                    <div> 
-                        Review no. {index+1} : {review.review} Author {review.author ? FRIENDS[viewer_id].includes(review.revi)} 
-                    </div>
-                    )
-                }
-            )
-        }
+        Reviews : 
+        <Container className="themed-container" fluid="md">
+            {
+                PRODUCT_INFO[product_id].reviews.map(
+                    (review, index) => {
+                        return (
+                        < Review review = {review} reviewNo={index+1} />
+                        )
+                    }
+                )
+            }
+        </Container>
     </div>
   );
 }
 
-export default Review;
+export default Reviews;
